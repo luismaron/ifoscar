@@ -14,4 +14,16 @@ model Student {
   id           String  @id @default(uuid())
   name         String
   registration String?
+
+  videoclip_id String?
+  videoclip    VideoClip? @relation(fields: [videoclip_id], references: [id])
+}
+
+model VideoClip {
+  id         String   @id @default(uuid())
+  name       String
+  created_at DateTime @default(now())
+  link       String
+
+  students Student[]
 }
