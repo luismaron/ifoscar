@@ -1,6 +1,7 @@
+import { AppError } from '../core/domain/errors/AppError';
 import { prisma } from '../database';
 
-interface IVideoclipDTO {
+interface IVideoClipDTO {
   name: string;
   link: string;
   students: {
@@ -8,10 +9,12 @@ interface IVideoclipDTO {
   }[];
 }
 
-class CreateVideoclipService {
-  async execute({ name, link, students }: IVideoclipDTO) {
+class CreateVideoClipService {
+  async execute({ name, link, students }: IVideoClipDTO) {
     if (!name || !link || students.length === 0) {
-      throw new Error();
+      throw new AppError(
+        'Name and link are required and at least one student in the clip'
+      );
     }
 
     const ids = students.map((student) => {
@@ -32,4 +35,4 @@ class CreateVideoclipService {
   }
 }
 
-export { CreateVideoclipService };
+export { CreateVideoClipService };
