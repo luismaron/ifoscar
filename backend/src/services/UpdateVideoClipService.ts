@@ -16,16 +16,11 @@ class UpdateVideoClipService {
       where: {
         id,
       },
-      include: {
-        students: true,
-      },
     });
 
     if (!videoClip) {
       throw new AppError('VideoClip does not exists', 404);
     }
-
-    // const idsToBeDisconnected = videoClip.
 
     const ids = students.map((student) => {
       return {
