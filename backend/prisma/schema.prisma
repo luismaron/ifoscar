@@ -14,6 +14,7 @@ model Student {
   id           String  @id @default(uuid())
   name         String
   registration String?
+  gender       String
 
   videoclip_id String?
   videoclip    VideoClip? @relation(fields: [videoclip_id], references: [id])

@@ -1,3 +1,4 @@
+import { getGenderByName } from 'br-gender';
 import { parse } from 'csv-parse';
 import fs from 'node:fs';
 
@@ -23,10 +24,18 @@ class ImportStudentsService {
     students.forEach(async (student) => {
       const { name, registration } = student;
 
+      const gender = (await getGenderByName(
+        name
+          .split(' ')[0]
+          .normalize('NFD')
+          .replace(/[\u0300-\u036f]/g, '')
+      )) as string; // Pega a primeira palavra do nome e substitui caracteres especiais por normais
+
       await prisma.student.create({
         data: {
           name,
           registration,
+          gender,
         },
       });
     });
