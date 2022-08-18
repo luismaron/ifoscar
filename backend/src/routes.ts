@@ -6,6 +6,7 @@ import { CreateVideoClipController } from './controllers/CreateVideoClipControll
 import ImportStudentsController from './controllers/ImportStudentsController';
 import { ListVideoClipsController } from './controllers/ListVideoClipsController';
 import { UpdateVideoClipController } from './controllers/UpdateVideoClipController';
+import { VoteController } from './controllers/VoteController';
 
 const routes = Router();
 
@@ -18,6 +19,7 @@ const createStudentController = new CreateStudentController();
 const createVideoClipController = new CreateVideoClipController();
 const listVideoClipsController = new ListVideoClipsController();
 const updateVideoClipController = new UpdateVideoClipController();
+const voteController = new VoteController();
 
 routes.post(
   '/students/upload',
@@ -32,5 +34,7 @@ routes.post('/videoclips/create', createVideoClipController.handle);
 routes.get('/videoclips', listVideoClipsController.handle);
 
 routes.put('/videoclips/:id', updateVideoClipController.handle);
+
+routes.post('/vote', voteController.handle);
 
 export { routes };
