@@ -18,6 +18,9 @@ model Student {
 
   videoclip_id String?
   videoclip    VideoClip? @relation(fields: [videoclip_id], references: [id])
+
+  givenVotes    Vote[] @relation("student who voted")
+  receivedVotes Vote[] @relation("student who was voted")
 }
 
 model VideoClip {
@@ -27,4 +30,30 @@ model VideoClip {
   link       String
 
   students Student[]
+  Vote     Vote[]
+}
+
+model Vote {
+  id         String   @id @default(uuid())
+  created_at DateTime @default(now())
+  category   Category
+
+  student_id String
+  student    Student @relation("student who voted", fields: [student_id], references: [id])
+
+  student_voted_id String?
+  student_voted    Student? @relation("student who was voted", fields: [student_voted_id], references: [id])
+
+  videoclip_voted_id String?
+  videoclip_voted    VideoClip? @relation(fields: [videoclip_voted_id], references: [id])
+}
+
+enum Category {
+  ACTOR
+  ACTRESS
+  SUPPORTING_ACTOR
+  SUPPORTING_ACTRESS
+  EDITION
+  VIDEO_CLIP
+  COSTUME
 }
