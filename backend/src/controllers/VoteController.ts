@@ -6,18 +6,26 @@ class VoteController {
   async handle(request: Request, response: Response) {
     const {
       student_registration,
-      category,
-      student_voted_id,
-      videoclip_voted_id,
+      best_actor_id,
+      best_actress_id,
+      best_supporting_actor_id,
+      best_supporting_actress_id,
+      best_videoclip_costume_id,
+      best_videoclip_edition_id,
+      best_videoclip_id,
     } = request.body;
 
     const voteService = new VoteService();
 
     await voteService.execute({
-      category,
       student_registration,
-      student_voted_id: student_voted_id || null,
-      videoclip_voted_id: videoclip_voted_id || null,
+      best_actor_id,
+      best_actress_id,
+      best_supporting_actor_id,
+      best_supporting_actress_id,
+      best_videoclip_costume_id,
+      best_videoclip_edition_id,
+      best_videoclip_id,
     });
 
     return response.sendStatus(201);
