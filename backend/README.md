@@ -13,3 +13,8 @@
 - edition: needs video_clip_id
 - video_clip: needs video_clip_id
 - costume: needs video_clip_id
+
+# Regras de negócio do voto
+- Um estudante pode ter apenas um voto por categoria
+- Para um estudante poder receber voto de melhor ator/atriz ele necessita estar participando de algum clipe
+- Um menino não pode receber voto de melhor atriz e vice-versa
