@@ -4,6 +4,7 @@ import multer from 'multer';
 import { CreateStudentController } from './controllers/CreateStudentController';
 import { CreateVideoClipController } from './controllers/CreateVideoClipController';
 import ImportStudentsController from './controllers/ImportStudentsController';
+import { ListActorsController } from './controllers/ListActorsController';
 import { ListVideoClipsController } from './controllers/ListVideoClipsController';
 import { UpdateVideoClipController } from './controllers/UpdateVideoClipController';
 import { VoteController } from './controllers/VoteController';
@@ -20,6 +21,7 @@ const createVideoClipController = new CreateVideoClipController();
 const listVideoClipsController = new ListVideoClipsController();
 const updateVideoClipController = new UpdateVideoClipController();
 const voteController = new VoteController();
+const listActorsController = new ListActorsController();
 
 routes.post(
   '/students/upload',
@@ -36,5 +38,7 @@ routes.get('/videoclips', listVideoClipsController.handle);
 routes.put('/videoclips/:id', updateVideoClipController.handle);
 
 routes.post('/vote', voteController.handle);
+
+routes.get('/actors', listActorsController.handle);
 
 export { routes };
