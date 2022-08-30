@@ -1,14 +1,18 @@
 import React, { FormEvent, useEffect, useState } from "react";
+import { VoteCategory } from "./components/VoteCategory";
 import { api } from "./services/api";
 
-interface Actor {
+export interface Actor {
 	id: string;
 	name: string;
 	registration: string;
 	gender: "Male" | "Female";
+	videoclip: {
+		name: string;
+	}
 }
 
-interface VideoClip {
+export interface VideoClip {
 	id: string;
 	name: string;
 	link: string;
@@ -80,70 +84,73 @@ function App() {
 				<h2>Melhor ator</h2>
 				{
 					actors.filter(actor => actor.gender === "Male").map(actor => (
-						<div key={actor.id}>
-							<label htmlFor="actor">{actor.name}</label>
-							<input type="radio" name="actor" onClick={() => setSelectedActor(actor)} />
-						</div>
+						<VoteCategory 
+							key={actor.id} 
+							data={actor} 
+							nameHTML="actor" 
+							setSelected={() => setSelectedActor(actor)}
+							videoClipName={actor.videoclip.name}
+						/>
 					))
 				}
 
 				<h2>Melhor atriz</h2>
 				{
 					actors.filter(actor => actor.gender === "Female").map(actor => (
-						<div key={actor.id}>
-							<label htmlFor="actress">{actor.name}</label>
-							<input type="radio" name="actress" onClick={() => setSelectedActress(actor)} />
-						</div>
+						<VoteCategory 
+							key={actor.id} 
+							data={actor} 
+							nameHTML="actress" 
+							setSelected={() => setSelectedActress(actor)} 
+							videoClipName={actor.videoclip.name}
+						/>
 					))
 				}
 
 				<h2>Melhor ator coadjuvante</h2>
 				{
 					actors.filter(actor => actor.gender === "Male").map(actor => (
-						<div key={actor.id}>
-							<label htmlFor="supportingActor">{actor.name}</label>
-							<input type="radio" name="supportingActor" onClick={() => setSelectedSupportingActor(actor)} />
-						</div>
+						<VoteCategory 
+							key={actor.id} 
+							data={actor} 
+							nameHTML="supportingActor" 
+							setSelected={() => setSelectedSupportingActor(actor)} 
+							videoClipName={actor.videoclip.name}
+						/>
 					))
 				}
 
 				<h2>Melhor atriz coadjuvante</h2>
 				{
 					actors.filter(actor => actor.gender === "Female").map(actor => (
-						<div key={actor.id}>
-							<label htmlFor="supportingActress">{actor.name}</label>
-							<input type="radio" name="supportingActress" onClick={() => setSelectedSupportingActress(actor)} />
-						</div>
+						<VoteCategory 
+							key={actor.id} 
+							data={actor} 
+							nameHTML="supportingActress" 
+							setSelected={() => setSelectedSupportingActress(actor)} 
+							videoClipName={actor.videoclip.name}
+						/>
 					))
 				}
 
 				<h2>Melhor video clipe</h2>
 				{
 					videoClips.map(videoClip => (
-						<div key={videoClip.id}>
-							<label htmlFor="videoClip">{videoClip.name}</label>
-							<input type="radio" name="videoClip" onClick={() => setSelectedVideoClip(videoClip)} />
-						</div>
+						<VoteCategory key={videoClip.id} data={videoClip} nameHTML="videoClip" setSelected={() => setSelectedVideoClip(videoClip)} />
 					))
 				}
 
 				<h2>Melhor figurino</h2>
 				{
 					videoClips.map(videoClip => (
-						<div key={videoClip.id}>
-							<label htmlFor="videoClipCostume">{videoClip.name}</label>
-							<input type="radio" name="videoClipCostume" onClick={() => setSelectedVideoClipCostume(videoClip)} />
-						</div>
+						<VoteCategory key={videoClip.id} data={videoClip} nameHTML="videoClipCostume" setSelected={() => setSelectedVideoClipCostume(videoClip)} />
 					))
 				}
 
 				<h2>Melhor edição</h2>
 				{
 					videoClips.map(videoClip => (
-						<div key={videoClip.id}>
-							<label htmlFor="videoClipEdition">{videoClip.name}</label>
-							<input type="radio" name="videoClipEdition" onClick={() => setSelectedVideoClipEdition(videoClip)} />
-						</div>
+						<VoteCategory key={videoClip.id} data={videoClip} nameHTML="videoClipEdition" setSelected={() => setSelectedVideoClipEdition(videoClip)} />
 					))
 				}
 
@@ -153,6 +160,7 @@ function App() {
 					placeholder="Insira seu número de matrícula" 
 					name="registration" value={registration} 
 					onChange={(evt) => setRegistration(evt.target.value)} 
+					required
 				/>
 
 				<button type="submit">Enviar</button>
