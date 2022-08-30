@@ -3,6 +3,7 @@ import multer from 'multer';
 
 import { CreateStudentController } from './controllers/CreateStudentController';
 import { CreateVideoClipController } from './controllers/CreateVideoClipController';
+import { GetTop3VotedController } from './controllers/GetTop3VotedController';
 import ImportStudentsController from './controllers/ImportStudentsController';
 import { ListActorsController } from './controllers/ListActorsController';
 import { ListVideoClipsController } from './controllers/ListVideoClipsController';
@@ -22,6 +23,7 @@ const listVideoClipsController = new ListVideoClipsController();
 const updateVideoClipController = new UpdateVideoClipController();
 const voteController = new VoteController();
 const listActorsController = new ListActorsController();
+const getTop3VotedController = new GetTop3VotedController();
 
 routes.post(
   '/students/upload',
@@ -40,5 +42,7 @@ routes.put('/videoclips/:id', updateVideoClipController.handle);
 routes.post('/vote', voteController.handle);
 
 routes.get('/actors', listActorsController.handle);
+
+routes.get('/vote/top3', getTop3VotedController.handle);
 
 export { routes };
