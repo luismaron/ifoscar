@@ -11,6 +11,9 @@ class ListActorsService {
         where: {
           gender,
         },
+        include: {
+          videoclip: true,
+        },
       });
 
       const actorsWhoAreInAVideoClip = actors.filter(
@@ -20,7 +23,11 @@ class ListActorsService {
       return actorsWhoAreInAVideoClip;
     }
 
-    const actors = await prisma.student.findMany();
+    const actors = await prisma.student.findMany({
+      include: {
+        videoclip: true,
+      },
+    });
 
     const actorsWhoAreInAVideoClip = actors.filter(
       (actor) => actor.videoclip_id !== null
