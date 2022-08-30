@@ -28,12 +28,27 @@ class GetTop3VotedService {
       WHERE x.r >=1 AND x.r <= 3
     `) as IDataChampions[];
 
-    const data = {
-      dataActors,
-      dataVideoClips,
+    const dataFormatted = {
+      bestActors: dataActors.filter((data) => data.category === 'ACTOR'),
+      bestActress: dataActors.filter((data) => data.category === 'ACTRESS'),
+      bestSupportingActors: dataActors.filter(
+        (data) => data.category === 'SUPPORTING_ACTOR'
+      ),
+      bestSupportingActress: dataActors.filter(
+        (data) => data.category === 'SUPPORTING_ACTRESS'
+      ),
+      bestVideoClips: dataVideoClips.filter(
+        (data) => data.category === 'VIDEO_CLIP'
+      ),
+      bestCostumes: dataVideoClips.filter(
+        (data) => data.category === 'COSTUME'
+      ),
+      bestEditions: dataVideoClips.filter(
+        (data) => data.category === 'EDITION'
+      ),
     };
 
-    return data;
+    return dataFormatted;
   }
 }
 
