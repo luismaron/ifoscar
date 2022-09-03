@@ -3,17 +3,24 @@ import { Actor, VideoClip } from "../App";
 
 interface Props {
 	data: Actor | VideoClip;
-	nameHTML: string;
-  setSelected: (data: Actor | VideoClip) => void;
+	fieldValue: string;
 	videoClipName?: string;
 	required?: boolean;
+	register: any;
 } 
 
-export function VoteCategory({ data, nameHTML, setSelected, videoClipName, required = true }: Props): JSX.Element {
+export function VoteCategory({ data, fieldValue, videoClipName, required = true, register }: Props): JSX.Element {
 	return (
 		<div>
-			<label htmlFor={nameHTML}>{data.name} {videoClipName && `- ${videoClipName}`}</label>
-			<input type="radio" required={required} name={nameHTML} onClick={() => setSelected(data)} />
+			<label htmlFor={fieldValue}>{data.name} {videoClipName && `- ${videoClipName}`}</label>
+			<input 
+				type="radio" 
+				required={required} 
+				id={fieldValue}
+				name={fieldValue}
+				value={data.id}
+				{...register(fieldValue)}
+			/>
 		</div>
 	);
 }

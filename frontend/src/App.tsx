@@ -1,6 +1,9 @@
 import React, { FormEvent, useEffect, useState } from "react";
+import { FieldValues, useForm } from "react-hook-form";
 import { VoteCategory } from "./components/VoteCategory";
 import { api } from "./services/api";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 
 export interface Actor {
 	id: string;
@@ -19,29 +22,24 @@ export interface VideoClip {
 	actors: Actor[];
 }
 
-interface Vote {
-	student_registration: string;
-	best_actor_id: string;
-  best_actress_id: string;
-  best_supporting_actor_id: string;
-  best_supporting_actress_id: string;
-  best_videoclip_costume_id: string;
-  best_videoclip_edition_id: string;
-  best_videoclip_id: string;
-}
+const voteFormSchema = yup.object().shape({
+	registration: yup.string().required("Matrícula obrigatória."),
+	actor: yup.string().required("Voto para melhor ator obrigatório."),
+	actress: yup.string().required("Voto para melhor atriz obrigatório."),
+	supportingActor: yup.string().required("Voto para melhor ator coadjuvante obrigatório."),
+	supportingActress: yup.string().required("Voto para melhor atriz coadjuvante obrigatório."),
+	videoClip: yup.string().required("Voto para melhor video clipe obrigatório."),
+	videoClipCostume: yup.string().required("Voto para melhor figurino obrigatório."),
+	videoClipEdition: yup.string().required("Voto para melhor edição obrigatório."),
+});
 
 function App() {
-	const [registration, setRegistration] = useState("");
 	const [actors, setActors] = useState<Actor[]>([]);
 	const [videoClips, setVideoClips] = useState<VideoClip[]>([]);
 
-	const [selectedActor, setSelectedActor] = useState<Actor>({} as Actor);
-	const [selectedActress, setSelectedActress] = useState<Actor>({} as Actor);
-	const [selectedSupportingActor, setSelectedSupportingActor] = useState<Actor>({} as Actor);
-	const [selectedSupportingActress, setSelectedSupportingActress] = useState<Actor>({} as Actor);
-	const [selectedVideoClip, setSelectedVideoClip] = useState<VideoClip>({} as VideoClip);
-	const [selectedVideoClipCostume, setSelectedVideoClipCostume] = useState<VideoClip>({} as VideoClip);
-	const [selectedVideoClipEdition, setSelectedVideoClipEdition] = useState<VideoClip>({} as VideoClip);
+	const { register, handleSubmit, formState } = useForm({
+		resolver: yupResolver(voteFormSchema)
+	});
 
 	useEffect(() => {
 		async function loadData() {
@@ -55,19 +53,28 @@ function App() {
 		loadData();
 	}, []);
 
-	async function handleSubmitForm(evt: FormEvent) {
-		evt.preventDefault(); // Prevenir comportamento padrão do formulário
+	async function handleSubmitForm(data: FieldValues) {
+		const { 
+			registration, 
+			actor, 
+			actress, 
+			supportingActor,
+			supportingActress,
+			videoClip,
+			videoClipCostume,
+			videoClipEdition
+		} = data;
 
 		try {
 			await api.post("/vote", {
 				student_registration: registration,
-				best_actor_id: selectedActor.id,
-				best_actress_id: selectedActress.id,
-				best_supporting_actor_id: selectedSupportingActor.id,
-				best_supporting_actress_id: selectedSupportingActress.id,
-				best_videoclip_costume_id: selectedVideoClipCostume.id,
-				best_videoclip_edition_id: selectedVideoClipEdition.id,
-				best_videoclip_id: selectedVideoClip.id
+				best_actor_id: actor,
+				best_actress_id: actress,
+				best_supporting_actor_id: supportingActor,
+				best_supporting_actress_id: supportingActress,
+				best_videoclip_costume_id: videoClipCostume,
+				best_videoclip_edition_id: videoClipEdition,
+				best_videoclip_id: videoClip
 			});
 
 			alert("Voto enviado!");
@@ -80,16 +87,16 @@ function App() {
 		<div>
 			<h1>Ifoscar</h1>
 
-			<form onSubmit={handleSubmitForm}>
+			<form onSubmit={handleSubmit(handleSubmitForm)}>
 				<h2>Melhor ator</h2>
 				{
 					actors.filter(actor => actor.gender === "Male").map(actor => (
 						<VoteCategory 
 							key={actor.id} 
 							data={actor} 
-							nameHTML="actor" 
-							setSelected={() => setSelectedActor(actor)}
+							fieldValue="actor" 
 							videoClipName={actor.videoclip.name}
+							register={register}
 						/>
 					))
 				}
@@ -100,9 +107,9 @@ function App() {
 						<VoteCategory 
 							key={actor.id} 
 							data={actor} 
-							nameHTML="actress" 
-							setSelected={() => setSelectedActress(actor)} 
+							fieldValue="actress" 
 							videoClipName={actor.videoclip.name}
+							register={register}
 						/>
 					))
 				}
@@ -113,9 +120,9 @@ function App() {
 						<VoteCategory 
 							key={actor.id} 
 							data={actor} 
-							nameHTML="supportingActor" 
-							setSelected={() => setSelectedSupportingActor(actor)} 
+							fieldValue="supportingActor" 
 							videoClipName={actor.videoclip.name}
+							register={register}
 						/>
 					))
 				}
@@ -126,9 +133,9 @@ function App() {
 						<VoteCategory 
 							key={actor.id} 
 							data={actor} 
-							nameHTML="supportingActress" 
-							setSelected={() => setSelectedSupportingActress(actor)} 
+							fieldValue="supportingActress" 
 							videoClipName={actor.videoclip.name}
+							register={register}
 						/>
 					))
 				}
@@ -136,21 +143,36 @@ function App() {
 				<h2>Melhor video clipe</h2>
 				{
 					videoClips.map(videoClip => (
-						<VoteCategory key={videoClip.id} data={videoClip} nameHTML="videoClip" setSelected={() => setSelectedVideoClip(videoClip)} />
+						<VoteCategory 
+							key={videoClip.id} 
+							data={videoClip} 
+							fieldValue="videoClip" 
+							register={register}
+						/>
 					))
 				}
 
 				<h2>Melhor figurino</h2>
 				{
 					videoClips.map(videoClip => (
-						<VoteCategory key={videoClip.id} data={videoClip} nameHTML="videoClipCostume" setSelected={() => setSelectedVideoClipCostume(videoClip)} />
+						<VoteCategory 
+							key={videoClip.id} 
+							data={videoClip} 
+							fieldValue="videoClipCostume" 
+							register={register} 
+						/>
 					))
 				}
 
 				<h2>Melhor edição</h2>
 				{
 					videoClips.map(videoClip => (
-						<VoteCategory key={videoClip.id} data={videoClip} nameHTML="videoClipEdition" setSelected={() => setSelectedVideoClipEdition(videoClip)} />
+						<VoteCategory 
+							key={videoClip.id} 
+							data={videoClip} 
+							fieldValue="videoClipEdition" 
+							register={register}
+						/>
 					))
 				}
 
@@ -158,9 +180,8 @@ function App() {
 				<input 
 					type="text" 
 					placeholder="Insira seu número de matrícula" 
-					name="registration" value={registration} 
-					onChange={(evt) => setRegistration(evt.target.value)} 
 					required
+					{...register("registration")}
 				/>
 
 				<button type="submit">Enviar</button>
