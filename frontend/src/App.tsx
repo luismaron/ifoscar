@@ -37,7 +37,7 @@ function App() {
 	const [actors, setActors] = useState<Actor[]>([]);
 	const [videoClips, setVideoClips] = useState<VideoClip[]>([]);
 
-	const { register, handleSubmit, formState } = useForm({
+	const { register, handleSubmit, reset } = useForm({
 		resolver: yupResolver(voteFormSchema)
 	});
 
@@ -78,6 +78,8 @@ function App() {
 			});
 
 			alert("Voto enviado!");
+
+			reset();
 		} catch (error) {
 			alert("Erro ao realizar voto.");
 		}
