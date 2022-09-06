@@ -10,6 +10,12 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Admin {
+  id       String @id @default(uuid())
+  email    String
+  password String
+}
+
 model Student {
   id           String  @id @default(uuid())
   name         String
