@@ -1,5 +1,6 @@
+import { CircleWavyCheck } from "phosphor-react";
 import React from "react";
-import { CardContainer } from "./styles";
+import { CardContainer, SelectedContainer } from "./styles";
 
 interface CardProps {
 	id: string;
@@ -12,6 +13,11 @@ interface CardProps {
 export function Card({ id, title, description, isSelected, setSelected }: CardProps) {
 	return (
 		<CardContainer isSelected={isSelected} onClick={() => setSelected(id)}>
+			{ isSelected && (
+				<SelectedContainer>
+					<CircleWavyCheck size={30} />
+				</SelectedContainer>
+			)}
 			<span>{title}</span>
 			<p>{description}</p>
 		</CardContainer>
