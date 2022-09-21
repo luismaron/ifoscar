@@ -18,12 +18,15 @@ export const NextCategoryContainer = styled.div`
     }
   }
 
-  a {
+  button {
     display: flex;
     align-items: center;
     justify-content: center;
     text-decoration: none;
     gap: 1rem;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
 
     h1 {
       font-size: 2.25rem;

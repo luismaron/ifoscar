@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const ActressContainer = styled.div`
+export const VideoClipContainer = styled.div`
   padding: 0 3rem;
   display: flex;
   align-items: center;

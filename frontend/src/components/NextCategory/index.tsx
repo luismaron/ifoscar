@@ -1,5 +1,6 @@
 import { CaretCircleDoubleRight } from "phosphor-react";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 import line from "../../assets/line.svg";
 
@@ -10,12 +11,14 @@ interface NextCategoryProps {
 }
 
 export function NextCategory({ link }: NextCategoryProps) {
+	const navigate = useNavigate();
+
 	return (
 		<NextCategoryContainer>
-			<a href={link}>
-				<h1>Próximas categorias</h1>
+			<button onClick={() => navigate(`/${link}`)}>
+				<h1>Próxima categoria</h1>
 				<CaretCircleDoubleRight size={36} />
-			</a>
+			</button>
 
 			<img src={line} alt="" />
 		</NextCategoryContainer>

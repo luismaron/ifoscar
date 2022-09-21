@@ -1,14 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { FieldValues, useForm } from "react-hook-form";
-import { api } from "./services/api";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
+import React from "react";
 import { ThemeProvider } from "styled-components";
 import { theme } from "./styles/theme";
 import { GlobalStyle } from "./styles/global";
-import { Header } from "./components/Header";
 import { Router } from "./Router";
 import { BrowserRouter } from "react-router-dom";
+import { VoteContextProvider } from "./contexts/VoteContext";
 
 /*export interface Actor {
 	id: string;
@@ -93,7 +89,9 @@ function App() {
 	return (
 		<ThemeProvider theme={theme}>
 			<BrowserRouter>
-				<Router />
+				<VoteContextProvider>
+					<Router />
+				</VoteContextProvider>
 			</BrowserRouter>
 			<GlobalStyle />
 		</ThemeProvider>

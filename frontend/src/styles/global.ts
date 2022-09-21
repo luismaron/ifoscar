@@ -17,4 +17,15 @@ export const GlobalStyle = createGlobalStyle`
     font-size: "1rem";
     color: ${({ theme }) => theme.colors.white}
   }
+
+  @media (max-width: 1080px) {
+    html {
+      font-size: 93.75%;
+    }
+  }
+  @media (max-width: 720px) {
+    html {
+      font-size: 87.5%;
+    }
+  }
 `;

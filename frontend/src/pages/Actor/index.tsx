@@ -1,53 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { Card } from "../../components/Card";
 import { CategoryGroup } from "../../components/CategoryGroup";
 import { Header } from "../../components/Header";
 import { NextCategory } from "../../components/NextCategory";
-import { api } from "../../services/api";
-import { BestActorContainer } from "./styles";
-
-export interface Actor {
-	id: string;
-	name: string;
-	registration: string;
-	gender: "Male" | "Female";
-	videoclip: {
-		name: string;
-	}
-}
+import { VoteContext } from "../../contexts/VoteContext";
+import { ActorContainer } from "./styles";
 
 export function Actor() {
-	const [actors, setActors] = useState<Actor[]>([]);
-	const [selected, setSelected] = useState("");
-
-	useEffect(() => {
-		async function loadData() {
-			const responseActors = await api.get("/actors", {
-				params: {
-					gender: "Male"
-				}
-			});
-			setActors(responseActors.data);
-		}
-
-		loadData();
-	}, []);
-
-	function handleSelectActor(id: string) {
-		setSelected(id);
-	}
+	const { actors, selectedActor, setSelectedActor } = useContext(VoteContext);
 
 	return (
 		<>
 			<Header hasBeforePage={false} />
 
-			<BestActorContainer>
+			<ActorContainer>
 			
 				<CategoryGroup title="1 Melhor ator">
 					{actors.map(actor => (
 						<Card 
-							isSelected={selected === actor.id} 
-							setSelected={handleSelectActor} 
+							isSelected={selectedActor.id === actor.id} 
+							setSelected={setSelectedActor} 
 							id={actor.id}
 							key={actor.id} 
 							title={actor.name} 
@@ -55,7 +27,7 @@ export function Actor() {
 						/>
 					))}					
 				</CategoryGroup>
-			</BestActorContainer>
+			</ActorContainer>
 
 			<NextCategory link="actress" />
 		</>
