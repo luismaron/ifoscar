@@ -7,7 +7,7 @@ import { VoteContext } from "../../contexts/VoteContext";
 import { ActressContainer } from "./styles";
 
 export function Actress() {
-	const { actress, selectedActress, setSelectedActress, selectedActor } = useContext(VoteContext);
+	const { actress, selectedActress, setSelectedActress } = useContext(VoteContext);
 
 	return (
 		<>
@@ -29,7 +29,7 @@ export function Actress() {
 				</CategoryGroup>
 			</ActressContainer>
 
-			<NextCategory link="videoClip" />
+			<NextCategory link="videoClip" hasSelected={JSON.stringify(selectedActress) !== "{}"} />
 		</>
 	);
 }

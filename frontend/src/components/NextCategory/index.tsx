@@ -8,14 +8,23 @@ import { NextCategoryContainer } from "./styles";
 
 interface NextCategoryProps {
   link: string;
+	hasSelected: boolean;
 }
 
-export function NextCategory({ link }: NextCategoryProps) {
+export function NextCategory({ link, hasSelected }: NextCategoryProps) {
 	const navigate = useNavigate();
+
+	function handleNavigate() {
+		if (!hasSelected) {
+			return alert("Selecione um concorrente antes de prosseguir.");
+		}
+
+		navigate(`/${link}`);
+	}
 
 	return (
 		<NextCategoryContainer>
-			<button onClick={() => navigate(`/${link}`)}>
+			<button onClick={handleNavigate}>
 				<h1>Próxima categoria</h1>
 				<CaretCircleDoubleRight size={36} />
 			</button>

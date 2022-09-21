@@ -29,6 +29,7 @@ interface VoteContextType {
   setSelectedActor: (id: string) => void;
   setSelectedActress: (id: string) => void;
 	setSelectedVideoClip: (id: string) => void;
+	reset: () => void;
 }
 
 export const VoteContext = createContext({} as VoteContextType);
@@ -61,6 +62,12 @@ export function VoteContextProvider({ children }: VoteContextProviderProps) {
 		setSelectedVideoClip(findVideoClip);
 	}
 
+	function reset() {
+		setSelectedActor({} as Actor);
+		setSelectedActress({} as Actor);
+		setSelectedVideoClip({} as VideoClip);
+	}
+
 	useEffect(() => {
 		async function loadData() {
 			const responseActors = await api.get("/actors");
@@ -87,7 +94,8 @@ export function VoteContextProvider({ children }: VoteContextProviderProps) {
 			selectedVideoClip,
 			setSelectedActor: onSelectActor,
 			setSelectedActress: onSelectActress,
-			setSelectedVideoClip: onSelectVideoClip
+			setSelectedVideoClip: onSelectVideoClip,
+			reset
 		}}>
 			{children}
 		</VoteContext.Provider>

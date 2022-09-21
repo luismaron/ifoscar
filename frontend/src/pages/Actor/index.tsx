@@ -29,7 +29,7 @@ export function Actor() {
 				</CategoryGroup>
 			</ActorContainer>
 
-			<NextCategory link="actress" />
+			<NextCategory link="actress" hasSelected={JSON.stringify(selectedActor) !== "{}"} />
 		</>
 	);
 }
