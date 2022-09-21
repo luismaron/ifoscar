@@ -2,6 +2,8 @@ import React from "react";
 import { createContext, ReactNode, useEffect, useState } from "react";
 import { api } from "../services/api";
 
+import { fakeActors, fakeVideoClips } from "../utils/fakeData";
+
 interface Actor {
 	id: string;
 	name: string;
@@ -16,7 +18,6 @@ interface VideoClip {
 	id: string;
 	name: string;
 	link: string;
-	actors: Actor[];
 }
 
 interface VoteContextType {
@@ -69,7 +70,7 @@ export function VoteContextProvider({ children }: VoteContextProviderProps) {
 	}
 
 	useEffect(() => {
-		async function loadData() {
+		/*async function loadData() {
 			const responseActors = await api.get("/actors");
 			const responseVideoClips = await api.get("/videoclips");
 			
@@ -81,7 +82,14 @@ export function VoteContextProvider({ children }: VoteContextProviderProps) {
 			setVideoClips(responseVideoClips.data);
 		}
 
-		loadData();
+		loadData();*/
+
+		const filteredActors = fakeActors.filter((actor: Actor) => actor.gender === "Male");
+		const filteredActress = fakeActors.filter((actor: Actor) => actor.gender === "Female");
+
+		setActors(filteredActors);
+		setActress(filteredActress);
+		setVideoClips(fakeVideoClips);
 	}, []);
 
 	return (
