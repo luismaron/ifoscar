@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Card } from "../../components/Card";
 import { CategoryGroup } from "../../components/CategoryGroup";
 import { Header } from "../../components/Header";
+import { NextCategory } from "../../components/NextCategory";
 import { api } from "../../services/api";
 import { BestActorContainer } from "./styles";
 
@@ -15,7 +16,7 @@ export interface Actor {
 	}
 }
 
-export function BestActor() {
+export function Actor() {
 	const [actors, setActors] = useState<Actor[]>([]);
 	const [selected, setSelected] = useState("");
 
@@ -38,7 +39,7 @@ export function BestActor() {
 
 	return (
 		<>
-			<Header />
+			<Header hasBeforePage={false} />
 
 			<BestActorContainer>
 			
@@ -55,6 +56,8 @@ export function BestActor() {
 					))}					
 				</CategoryGroup>
 			</BestActorContainer>
+
+			<NextCategory link="actress" />
 		</>
 	);
 }

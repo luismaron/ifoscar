@@ -24,8 +24,8 @@ export const HeaderContainer = styled.header`
     @media (max-width: 1024px) {
       top: -3rem;
       left: -2rem;
-      width: 10rem;
-      height: 10rem;
+      width: 9rem;
+      height: 9rem;
     }
 
     span {
@@ -36,8 +36,46 @@ export const HeaderContainer = styled.header`
       font-family: ${({ theme }) => theme.fonts.oleo};
 
       @media (max-width: 1024px) {
-        font-size: 2rem;
+        font-size: 1.5rem;
       }
+    }
+  }
+
+  button {
+    cursor: pointer;
+    position: absolute;
+    top: -4rem;
+    left: -3rem;
+    width: 14rem;
+    height: 14rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: ${({ theme }) => theme.colors.yellow};
+    border-radius: 1000px;
+
+    @media (max-width: 1024px) {
+      top: -3rem;
+      left: -2rem;
+      width: 9rem;
+      height: 9rem;
+    }
+
+    span {
+      display: block;
+      margin-top: 1rem;
+      font-size: 2.5rem;
+      font-family: ${({ theme }) => theme.fonts.oleo};
+
+      @media (max-width: 1024px) {
+        font-size: 1.5rem;
+      }
+    }
+
+    svg {
+      margin-left: 1rem;
+      margin-top: 1rem;
     }
   }
 `;

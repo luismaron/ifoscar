@@ -1,11 +1,13 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import { BestActor } from "./pages/BestActor";
+import { Actor } from "./pages/Actor";
+import { Actress } from "./pages/Actress";
 
 export function Router() {
 	return (
 		<Routes>
-			<Route path="/" element={<BestActor />} />
+			<Route path="/" element={<Actor />} />
+			<Route path="/actress" element={<Actress />} />
 		</Routes>
 	);
 }
