@@ -7,7 +7,7 @@ interface CardContainerProps {
 export const CardContainer = styled.button<CardContainerProps>`
   position: relative;
   cursor: pointer;
-  max-width: 20rem;
+  max-width: 22rem;
   width: 100%;
   height: 6rem;
 
@@ -21,9 +21,8 @@ export const CardContainer = styled.button<CardContainerProps>`
   `}
 
   display: flex;
-  justify-content: center;
   align-items: center;
-  flex-direction: column;
+  flex-direction: row;
 
   span {
     text-align: center;
@@ -53,4 +52,39 @@ export const SelectedContainer = styled.div`
   svg {
     color: ${({ theme }) => theme.colors.green};
   }
+`;
+
+export const Texts = styled.div`
+  padding: 0 0.5rem;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+`;
+
+export const VideoLink = styled.button`
+  cursor: pointer;
+
+  max-width: 6rem;
+  width: 100%;
+  height: 100%;
+
+  background-color: transparent;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  background-color: ${({theme}) => theme.colors.yellow};
+  padding: 1rem;
+
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border: 0;
+  color: #000;
+  font-weight: bold;
 `;

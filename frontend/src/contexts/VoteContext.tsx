@@ -70,7 +70,7 @@ export function VoteContextProvider({ children }: VoteContextProviderProps) {
 	}
 
 	useEffect(() => {
-		/*async function loadData() {
+		async function loadData() {
 			const responseActors = await api.get("/actors");
 			const responseVideoClips = await api.get("/videoclips");
 			
@@ -82,14 +82,7 @@ export function VoteContextProvider({ children }: VoteContextProviderProps) {
 			setVideoClips(responseVideoClips.data);
 		}
 
-		loadData();*/
-
-		const filteredActors = fakeActors.filter((actor: Actor) => actor.gender === "Male");
-		const filteredActress = fakeActors.filter((actor: Actor) => actor.gender === "Female");
-
-		setActors(filteredActors);
-		setActress(filteredActress);
-		setVideoClips(fakeVideoClips);
+		loadData();
 	}, []);
 
 	return (
