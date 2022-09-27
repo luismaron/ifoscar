@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import { Actor } from "./pages/Actor";
 import { Actress } from "./pages/Actress";
 import { VideoClip } from "./pages/VideoClip";
+import { Winners } from "./pages/Winners";
 
 export function Router() {
 	return (
@@ -10,6 +11,7 @@ export function Router() {
 			<Route path="/" element={<Actor />} />
 			<Route path="/actress" element={<Actress />} />
 			<Route path="/videoClip" element={<VideoClip />} />
+			<Route path="/winners" element={<Winners />} />
 		</Routes>
 	);
 }

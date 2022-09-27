@@ -11,6 +11,7 @@ interface Actor {
 	gender: "Male" | "Female";
 	videoclip: {
 		name: string;
+		link: string;
 	}
 }
 
