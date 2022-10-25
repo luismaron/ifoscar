@@ -15,6 +15,12 @@ class ListVideoClipsService {
           gte: new Date(`${yearFormatted}-01-01`),
         },
       },
+      include: {
+        actor: true,
+        actress: true,
+        supporting_actor: true,
+        supporting_actress: true,
+      },
     });
 
     return videoClips;
