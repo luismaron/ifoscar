@@ -22,8 +22,12 @@ model Student {
   registration String?
   gender       String
 
-  videoclip_id String?
-  videoclip    VideoClip? @relation(fields: [videoclip_id], references: [id])
+  
+
+  videoClip_actor VideoClip? @relation("actor")
+  videoClip_actress VideoClip? @relation("actress")
+  videoClip_supporting_actor VideoClip? @relation("supporting_actor")
+  videoClip_supporting_actress VideoClip? @relation("supporting_actress")
 
   givenVotes    Vote[] @relation("student who voted")
   receivedVotes Vote[] @relation("student who was voted")
@@ -35,7 +39,18 @@ model VideoClip {
   created_at DateTime @default(now())
   link       String
 
-  students Student[]
+  actor_id    String @unique
+  actor       Student @relation(fields: [actor_id], references: [id], name: "actor")
+
+  actress_id String @unique
+  actress   Student @relation(fields: [actress_id], references: [id], name: "actress")
+
+  supporting_actor_id String @unique
+  supporting_actor   Student @relation(fields: [supporting_actor_id], references: [id], name: "supporting_actor")
+
+  supporting_actress_id String @unique
+  supporting_actress   Student @relation(fields: [supporting_actress_id], references: [id], name: "supporting_actress")
+
   Vote     Vote[]
 }
 
