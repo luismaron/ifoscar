@@ -20,21 +20,24 @@ class AuthenticateAdminService {
     if (!admin) {
       throw new AppError('Email or password invalid.');
     }
-
     const passwordMatch = await compare(password, admin.password);
 
     if (!passwordMatch) {
       throw new AppError('Email or password invalid.');
     }
 
-    const secretToken = process.env.JWT_SECRET as string;
+    try {
+      const secretToken = process.env.JWT_SECRET as string;
 
-    const token = sign({}, secretToken, {
-      subject: admin.id,
-      expiresIn: '1d',
-    });
+      const token = sign({}, secretToken, {
+        subject: admin.id,
+        expiresIn: '1d',
+      });
 
-    return token;
+      return token;
+    } catch (error) {
+      throw new AppError('Unexpected error');
+    }
   }
 }
 

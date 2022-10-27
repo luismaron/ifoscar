@@ -25,7 +25,7 @@ class CreateVideoClipService {
       !actor_id ||
       !actress_id ||
       !supporting_actress_id ||
-      supporting_actor_id
+      !supporting_actor_id
     ) {
       throw new AppError(
         'Name and link are required and actors student in the clip'

@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { useContext } from 'react';
-import logo from '../../public/logo.svg';
+import logo from '../../public/logoWithLine.svg';
 import { AuthContext } from '../contexts/AuthContext';
 
 export function Header() {

@@ -16,8 +16,9 @@ export async function ensureAuthenticated(
 
   const [, token] = authHeader.split(' ');
 
-  const secretToken = process.env.JWT_SECRET as string;
+  console.log(token);
 
+  const secretToken = process.env.JWT_SECRET as string;
   try {
     const { sub: user_id } = verify(token, secretToken);
 
@@ -27,6 +28,7 @@ export async function ensureAuthenticated(
 
     next();
   } catch (error) {
+    console.log(error.message);
     throw new AppError('Token invalid.', 401);
   }
 }

@@ -10,6 +10,7 @@ interface IStudentDTO {
 
 class CreateStudentService {
   async execute({ name, registration, gender }: IStudentDTO): Promise<Student> {
+    console.log(name, registration, gender);
     const student = await prisma.student.create({
       data: {
         name,

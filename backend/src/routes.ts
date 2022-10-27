@@ -7,6 +7,8 @@ import { CreateVideoClipController } from './controllers/CreateVideoClipControll
 import { GetTop3VotedController } from './controllers/GetTop3VotedController';
 import ImportStudentsController from './controllers/ImportStudentsController';
 import { ListActorsController } from './controllers/ListActorsController';
+import { ListStudentsController } from './controllers/ListStudentsController';
+import { ListStudentsPaginatedController } from './controllers/ListStudentsPaginatedController';
 import { ListVideoClipsController } from './controllers/ListVideoClipsController';
 import { UpdateVideoClipController } from './controllers/UpdateVideoClipController';
 import { VoteController } from './controllers/VoteController';
@@ -28,6 +30,8 @@ const voteController = new VoteController();
 const listActorsController = new ListActorsController();
 const getTop3VotedController = new GetTop3VotedController();
 const authenticateAdminController = new AuthenticateAdminController();
+const listStudentsController = new ListStudentsController();
+const listStudentsPaginatedController = new ListStudentsPaginatedController();
 
 routes.post(
   '/students/upload',
@@ -67,5 +71,19 @@ routes.get('/actors', listActorsController.handle);
 routes.get('/vote/top3', getTop3VotedController.handle);
 
 routes.post('/admin/session', authenticateAdminController.handle);
+
+routes.get(
+  '/students/paginated',
+  ensureAuthenticated,
+  ensureAdmin,
+  listStudentsPaginatedController.handle
+);
+
+routes.get(
+  '/students/',
+  ensureAuthenticated,
+  ensureAdmin,
+  listStudentsController.handle
+);
 
 export { routes };

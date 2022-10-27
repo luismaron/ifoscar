@@ -1,13 +1,8 @@
 import Router from "next/router";
-import { destroyCookie, parseCookies, setCookie } from "nookies";
 import { createContext, ReactNode, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { api } from "../services/api";
 
-interface User {
-  name: string;
-  email: string;
-}
 
 interface SignInCredentials {
   email: string;
@@ -17,7 +12,6 @@ interface SignInCredentials {
 interface AuthContextData {
   signIn: (credentials: SignInCredentials) => Promise<void>;
   signOut: () => void;
-  user: User;
   isAuthenticated: boolean;
 }
 
@@ -28,65 +22,52 @@ interface AuthProviderProps {
 export const AuthContext = createContext({} as AuthContextData);
 
 export function AuthProvider({ children }: AuthProviderProps) {
-  const [user, setUser] = useState<User>({} as User);
-  const isAuthenticated = user.email ? true : false;
+  const [token, setToken] = useState<string | null>(null);
+  const isAuthenticated = token != null;
 
   useEffect(() => {
-    const { 'dashboard-devlandia.token': token } = parseCookies();
-    
-    api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    const token = localStorage.getItem('dashboard-ifoscar.token');
 
-    if(token) {
-      api.get("users/profile").then(response => {
-        const { email, name, is_admin } = response.data;
+    if (token) {
+      setToken(token);
+      api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
-        if (!is_admin) {
-          signOut();
-        } 
-
-        setUser({ email, name });
-      }).catch((err) => {
-        signOut();
-      })
+    }
+    else {
+      signOut();
     }
   }, []);
 
   function signOut() {
-    setCookie(undefined, 'dashboard-devlandia.token', '', {
-      maxAge: -1, 
-      path: '/'
-    });
-    
+    localStorage.removeItem('dashboard-ifoscar.token');
+
     Router.push('/');
   }
 
   async function signIn({ email, password }: SignInCredentials) {
-    const response = await api.post('/sessions', {
+    const response = await api.post('/admin/session', {
       email,
-      password 
+      password
     });
 
-    const { user, token } = response.data;
 
-    if (user.is_admin === false) {
+    const token = response.data;
+
+
+    if (!token) {
       toast.error("Email ou senha incorretos.");
       return;
     }
 
-    setUser(user);
-
-    setCookie(undefined, 'dashboard-devlandia.token', token, {
-      maxAge: 60 * 60 * 24, // 1 dia
-      path: '/'
-    });
-
+    localStorage.setItem('dashboard-ifoscar.token', token)
+    setToken(token)
     api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-
-    Router.push('/maps/create');
+    console.log('aqui')
+    Router.push('/students');
   }
 
   return (
-    <AuthContext.Provider value={{ signIn, signOut, user, isAuthenticated }}>
+    <AuthContext.Provider value={{ signIn, signOut, isAuthenticated }}>
       {children}
     </AuthContext.Provider>
   )

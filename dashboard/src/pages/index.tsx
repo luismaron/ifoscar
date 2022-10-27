@@ -2,12 +2,10 @@ import { GetServerSideProps } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import { Lock, User } from "phosphor-react";
-import { FormEvent, useContext, useEffect, useState } from "react";
-import homeImage from "../../public/homeImage.svg";
+import { FormEvent, useContext, useState } from "react";
 import logoWithLine from "../../public/logoWithLine.svg";
 import { Input } from "../components/Form/Input";
 import { AuthContext } from "../contexts/AuthContext";
-import { withSSRGuest } from "../utils/withSSRGuest";
 import { toast, ToastContainer } from 'react-toastify';
 
 export default function SignIn() {
@@ -32,7 +30,7 @@ export default function SignIn() {
   return (
     <>
       <Head>
-        <title>Dashboard DevLândia | Login</title>
+        <title>Dashboard IFOscar | Login</title>
       </Head>
       <div className="w-full h-screen overflow-auto flex flex-col-reverse md:flex-row">
         <ToastContainer 
@@ -46,7 +44,7 @@ export default function SignIn() {
             Dashboard
           </h1>
           <div className="w-full flex items-end justify-end">
-            <Image src={homeImage} alt="" />
+            <Image src={logoWithLine} alt="" />
           </div>
         </div>
         <div className="md:w-[47%] h-full p-2 bg-gray-950 flex flex-col items-center">
@@ -88,8 +86,3 @@ export default function SignIn() {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = withSSRGuest(async (context) => {
-  return {
-    props: {}
-  }
-})

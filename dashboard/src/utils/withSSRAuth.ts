@@ -5,7 +5,7 @@ export function withSSRAuth<P>(fn: GetServerSideProps): GetServerSideProps {
   return async (context: GetServerSidePropsContext) => {
     const cookies = parseCookies(context);
 
-    const token = cookies['dashboard-devlandia.token'];
+    const token = cookies['dashboard-ifoscar.token'];
 
     if(!token) {
       return {
@@ -19,7 +19,7 @@ export function withSSRAuth<P>(fn: GetServerSideProps): GetServerSideProps {
     try {
       return await fn(context)
     } catch (err) {
-        destroyCookie(context, 'dashboard-devlandia.token');
+        destroyCookie(context, 'dashboard-ifoscar.token');
 
         return {
           redirect: {

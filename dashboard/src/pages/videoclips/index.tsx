@@ -175,7 +175,7 @@ export default function Phases() {
   return (
     <>
       <Head>
-        <title>Dashboard DevLândia | Listagem de mapas</title>
+        <title>Dashboard IFOscar | Listagem de videoclips</title>
       </Head>
 
       <div className="h-screen bg-gray-950 overflow-auto"> 

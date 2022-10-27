@@ -26,6 +26,7 @@ class ImportStudentsService {
 
       const gender = (await getGenderByName(
         name
+          .trimStart()
           .split(' ')[0]
           .normalize('NFD')
           .replace(/[\u0300-\u036f]/g, '')

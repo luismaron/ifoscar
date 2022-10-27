@@ -8,7 +8,7 @@ class CreateStudentController {
 
     const createStudentService = new CreateStudentService();
 
-    await createStudentService.execute(name, registration, gender);
+    await createStudentService.execute({ name, registration, gender });
 
     return response.sendStatus(201);
   }
