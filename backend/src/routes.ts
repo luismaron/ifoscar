@@ -10,6 +10,7 @@ import { ListActorsController } from './controllers/ListActorsController';
 import { ListStudentsController } from './controllers/ListStudentsController';
 import { ListStudentsPaginatedController } from './controllers/ListStudentsPaginatedController';
 import { ListVideoClipsController } from './controllers/ListVideoClipsController';
+import { ListVideoClipsPaginatedController } from './controllers/ListVideoClipsPaginatedController';
 import { UpdateVideoClipController } from './controllers/UpdateVideoClipController';
 import { VoteController } from './controllers/VoteController';
 import { ensureAdmin } from './middlewares/ensureAdmin';
@@ -32,6 +33,8 @@ const getTop3VotedController = new GetTop3VotedController();
 const authenticateAdminController = new AuthenticateAdminController();
 const listStudentsController = new ListStudentsController();
 const listStudentsPaginatedController = new ListStudentsPaginatedController();
+const lListVideoClipsPaginatedController =
+  new ListVideoClipsPaginatedController();
 
 routes.post(
   '/students/upload',
@@ -78,7 +81,12 @@ routes.get(
   ensureAdmin,
   listStudentsPaginatedController.handle
 );
-
+routes.get(
+  '/videoclips/paginated',
+  ensureAuthenticated,
+  ensureAdmin,
+  lListVideoClipsPaginatedController.handle
+);
 routes.get(
   '/students/',
   ensureAuthenticated,
