@@ -1,4 +1,5 @@
 import { yupResolver } from "@hookform/resolvers/yup";
+import { GetServerSideProps } from "next";
 import Head from "next/head";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -9,6 +10,7 @@ import { InputWithLabel } from "../../components/Form/InputWithLabel";
 import { Header } from "../../components/Header";
 import { Sidebar } from "../../components/Sidebar";
 import { api } from "../../services/api";
+import { withSSRAuth } from "../../utils/withSSRAuth";
 
 interface CreateStudentFormData {
   name: string;
@@ -125,3 +127,9 @@ export default function CreateStudents() {
     </>
   )
 }
+
+export const getServerSideProps: GetServerSideProps = withSSRAuth(async (context) => {
+  return {
+    props: {}
+  }
+})

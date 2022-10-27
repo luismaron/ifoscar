@@ -1,4 +1,5 @@
 import Router from "next/router";
+import { setCookie } from "nookies";
 import { createContext, ReactNode, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { api } from "../services/api";
@@ -39,8 +40,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
   }, []);
 
   function signOut() {
-    localStorage.removeItem('dashboard-ifoscar.token');
-
+    setCookie(undefined, 'dashboard-devlandia.token', '', {
+      maxAge: -1,
+      path: '/'
+    });
     Router.push('/');
   }
 
@@ -59,10 +62,13 @@ export function AuthProvider({ children }: AuthProviderProps) {
       return;
     }
 
-    localStorage.setItem('dashboard-ifoscar.token', token)
+    setCookie(undefined, 'dashboard-ifoscar.token', token, {
+      maxAge: 60 * 60 * 24, // 1 dia
+      path: '/'
+    });
+
     setToken(token)
     api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-    console.log('aqui')
     Router.push('/students');
   }
 

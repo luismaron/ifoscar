@@ -11,6 +11,8 @@ import { api } from "../../services/api";
 
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup"
+import { GetServerSideProps } from "next";
+import { withSSRAuth } from "../../utils/withSSRAuth";
 
 interface Student {
   id: string;
@@ -195,3 +197,9 @@ export default function CreateVideoClip() {
     </>
   )
 }
+
+export const getServerSideProps: GetServerSideProps = withSSRAuth(async (context) => {
+  return {
+    props: {}
+  }
+})

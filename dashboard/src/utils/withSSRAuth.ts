@@ -7,7 +7,7 @@ export function withSSRAuth<P>(fn: GetServerSideProps): GetServerSideProps {
 
     const token = cookies['dashboard-ifoscar.token'];
 
-    if(!token) {
+    if (!token) {
       return {
         redirect: {
           destination: '/',
@@ -19,14 +19,14 @@ export function withSSRAuth<P>(fn: GetServerSideProps): GetServerSideProps {
     try {
       return await fn(context)
     } catch (err) {
-        destroyCookie(context, 'dashboard-ifoscar.token');
+      destroyCookie(context, 'dashboard-ifoscar.token');
 
-        return {
-          redirect: {
-            destination: '/',
-            permanent: false
-          }
+      return {
+        redirect: {
+          destination: '/',
+          permanent: false
         }
+      }
     }
   }
 }

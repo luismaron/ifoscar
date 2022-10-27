@@ -1,3 +1,4 @@
+import { GetServerSideProps } from "next";
 import Head from "next/head";
 import { config } from "process";
 import { useEffect, useState } from "react"
@@ -6,6 +7,7 @@ import { Header } from "../../components/Header";
 import Pagination from "../../components/Pagination";
 import { Sidebar } from "../../components/Sidebar";
 import { api } from "../../services/api";
+import { withSSRAuth } from "../../utils/withSSRAuth";
 
 type VideoClip = {
   id: string
@@ -47,6 +49,16 @@ export default function VideoClips() {
   }
 
   useEffect(() => {
+    async function loadData() {
+      const responseStudents = await api.get("/videoclips/paginated", {
+        params: {
+          pageSize,
+          pageNumber: currentPage
+        }
+      });
+      setVideoClips(responseStudents.data.videoClips);
+      setTotalResults(responseStudents.data.videoClipCount);
+    }
     loadData();
   }, [currentPage]);
 
@@ -117,3 +129,9 @@ export default function VideoClips() {
     </>
   )
 }
+
+export const getServerSideProps: GetServerSideProps = withSSRAuth(async (context) => {
+  return {
+    props: {}
+  }
+})

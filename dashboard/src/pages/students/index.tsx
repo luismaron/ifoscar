@@ -1,3 +1,4 @@
+import { GetServerSideProps } from "next";
 import Head from "next/head";
 import { config } from "process";
 import { useEffect, useState } from "react"
@@ -6,6 +7,7 @@ import { Header } from "../../components/Header";
 import Pagination from "../../components/Pagination";
 import { Sidebar } from "../../components/Sidebar";
 import { api } from "../../services/api";
+import { withSSRAuth } from "../../utils/withSSRAuth";
 
 type Student = {
   id: string
@@ -19,23 +21,22 @@ export default function Students() {
   const pageSize = 10;
   const [totalResults, setTotalResults] = useState(0);
 
-  async function loadData() {
-    const responseStudents = await api.get("/students/paginated", {
-      params: {
-        pageSize,
-        pageNumber: currentPage
-      }
-    });
 
-    setStudents(responseStudents.data.actors);
-    setTotalResults(responseStudents.data.studentCount);
-  }
 
-  function changeCurrentPage(page: number): void {
-    setCurrentPage(page)
-  }
 
   useEffect(() => {
+    async function loadData() {
+      const responseStudents = await api.get("/students/paginated", {
+        params: {
+          pageSize,
+          pageNumber: currentPage
+        }
+      });
+
+      setStudents(responseStudents.data.actors);
+      setTotalResults(responseStudents.data.studentCount);
+    }
+
     loadData();
   }, [currentPage]);
 
@@ -86,3 +87,9 @@ export default function Students() {
     </>
   )
 }
+
+export const getServerSideProps: GetServerSideProps = withSSRAuth(async (context) => {
+  return {
+    props: {}
+  }
+})
