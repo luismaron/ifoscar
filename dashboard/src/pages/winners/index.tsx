@@ -11,11 +11,11 @@ import { withSSRAuth } from "../../utils/withSSRAuth";
 enum Categories {
 	bestActors = 'Melhor Ator',
 	bestActress = 'Melhor Atriz',
-	bestCostumes = 'Melhor ator coadjuvante',
-	bestEditions = 'Melhor atriz coadjuvante',
-	bestSupportingActors = 'Melhor video',
-	bestSupportingActress = 'Melhor fantasia',
-	bestVideoClips = 'Melhor edição'
+	bestSupportingActors = 'Melhor ator coadjuvante',
+	bestSupportingActress = 'Melhor atriz coadjuvante',
+	bestVideoClips = 'Melhor video',
+	bestCostumes = 'Melhor fantasia',
+	bestEditions = 'Melhor edição'
 }
 
 type WinnerData = {
