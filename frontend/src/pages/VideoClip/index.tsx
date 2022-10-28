@@ -27,19 +27,23 @@ export function VideoClip() {
 			<Header />
 
 			<VideoClipContainer>
-			
-				<CategoryGroup title="3 Melhor vídeo clipe">
-					{videoClips.map(videoClip => (
-						<Card 
-							isSelected={selectedVideoClip.id === videoClip.id} 
-							setSelected={setSelectedVideoClip} 
+
+				<CategoryGroup title="5 Melhor vídeo clipe">
+					{videoClips.sort((a, b) => {
+						if (a.name < b.name) return -1;
+						if (a.name > b.name) return 1;
+						return 0;
+					}).map(videoClip => (
+						<Card
+							isSelected={selectedVideoClip.id === videoClip.id}
+							setSelected={setSelectedVideoClip}
 							id={videoClip.id}
-							key={videoClip.id} 
-							title={videoClip.name} 
+							key={videoClip.id}
+							title={videoClip.name}
 							openModal={handleOpenModal}
 							link={videoClip.link}
 						/>
-					))}					
+					))}
 				</CategoryGroup>
 			</VideoClipContainer>
 

@@ -8,8 +8,8 @@ import { VoteContext } from "../../contexts/VoteContext";
 import { sortByActorName } from "../../utils/sortByName";
 import { ActorContainer } from "./styles";
 
-export function Actor() {
-	const { videoClips, selectedActor, setSelectedActor } = useContext(VoteContext);
+export function SupportingActor() {
+	const { videoClips, selectedSupportingActor, setSelectedSupportingActor } = useContext(VoteContext);
 
 	const [isOpen, setIsOpen] = useState(false);
 	const [link, setLink] = useState("");
@@ -29,14 +29,14 @@ export function Actor() {
 
 			<ActorContainer>
 
-				<CategoryGroup title="1 Melhor ator">
-					{sortByActorName(videoClips, "actor").map(videoClip => (
+				<CategoryGroup title="3 Melhor ator coadjuvante">
+					{sortByActorName(videoClips, "supporting_actor").map(videoClip => (
 						<Card
-							isSelected={selectedActor.id === videoClip.actor.id}
-							setSelected={setSelectedActor}
-							id={videoClip.actor.id}
-							key={videoClip.actor.id}
-							title={videoClip.actor.name}
+							isSelected={selectedSupportingActor.id === videoClip.supporting_actor.id}
+							setSelected={setSelectedSupportingActor}
+							id={videoClip.supporting_actor.id}
+							key={videoClip.supporting_actor.id}
+							title={videoClip.supporting_actor.name}
 							description={videoClip.name}
 							link={videoClip.link}
 							openModal={handleOpenModal}
@@ -45,7 +45,7 @@ export function Actor() {
 				</CategoryGroup>
 			</ActorContainer>
 
-			<NextCategory link="actress" hasSelected={JSON.stringify(selectedActor) !== "{}"} />
+			<NextCategory link="supportingActress" hasSelected={JSON.stringify(selectedSupportingActor) !== "{}"} />
 
 			<VideoModal isOpen={isOpen} onRequestClose={handleCloseModal} link={link} />
 		</>
