@@ -1,4 +1,4 @@
-/** @type {import('tailwindcss').Config} */ 
+/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx}",
@@ -7,6 +7,9 @@ module.exports = {
   theme: {
     colors: {
       'transparent': 'transparent',
+      'silver': '#c0c0c0',
+      'gold': '#DAA520',
+      'bronze': '#CD7F32',
       'white': '#FFFFFF',
       'black': '#000000',
       'red': '#FD2424',

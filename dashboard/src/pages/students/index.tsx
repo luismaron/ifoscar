@@ -1,6 +1,5 @@
 import { GetServerSideProps } from "next";
 import Head from "next/head";
-import { config } from "process";
 import { useEffect, useState } from "react"
 import { ToastContainer } from "react-toastify";
 import { Header } from "../../components/Header";

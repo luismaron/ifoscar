@@ -35,16 +35,8 @@ const SelectBase: ForwardRefRenderFunction<HTMLSelectElement, SelectProps>
           {...rest}
         >
           {
-            defaultSelected === null && (
-              <option value="" selected disabled className="bg-gray-850">
-                Selecione uma opção
-              </option>
-            )
-          }
-
-          {
             options.map(option => (
-              <option value={option.value} selected={option.value === defaultSelected} key={option.id} className="bg-gray-850">
+              <option value={option.value} key={option.id} className="bg-gray-850">
                 {option.title}{option.description && (`, ${option.description}`)}
               </option>
             ))

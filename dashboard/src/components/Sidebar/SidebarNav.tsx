@@ -44,6 +44,16 @@ export function SidebarNav() {
           />
         </NavSection>
       </div>
+      <div className="flex flex-col mt-9 gap-9 ">
+        <NavSection title="Vencedores">
+          <NavLink
+            title="Listar vencedores"
+            icon={<svg width="18" height="18" xmlns="http://www.w3.org/2000/svg"><path d="M15.857 8.571h-1.286V5.143c0-.952-.771-1.714-1.714-1.714H9.43V2.143a2.143 2.143 0 1 0-4.286 0v1.286H1.714A1.714 1.714 0 0 0 0 5.143V8.4h1.286A2.305 2.305 0 0 1 3.6 10.714a2.305 2.305 0 0 1-2.314 2.315H0v3.257A1.714 1.714 0 0 0 1.714 18h3.257v-1.286A2.305 2.305 0 0 1 7.286 14.4 2.305 2.305 0 0 1 9.6 16.714V18h3.257a1.714 1.714 0 0 0 1.714-1.714v-3.429h1.286a2.143 2.143 0 1 0 0-4.286Z" /></svg>}
+            link="/winners"
+            isActive={activeRoute === "/winners"}
+          />
+        </NavSection>
+      </div>
     </aside>
 
   )
