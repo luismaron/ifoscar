@@ -1,14 +1,14 @@
 import React, { useContext, useState } from "react";
 import { Card } from "../../components/Card";
 import { CategoryGroup } from "../../components/CategoryGroup";
+import { ConfirmVoteSection } from "../../components/ConfirmVoteSection";
 import { Header } from "../../components/Header";
-import { NextCategory } from "../../components/NextCategory";
 import { VideoModal } from "../../components/VideoModal";
 import { VoteContext } from "../../contexts/VoteContext";
 import { VideoClipContainer } from "./styles";
 
-export function VideoClip() {
-	const { videoClips, selectedVideoClip, setSelectedVideoClip } = useContext(VoteContext);
+export function Edition() {
+	const { videoClips, selectedEdition, setSelectedEdition } = useContext(VoteContext);
 
 	const [isOpen, setIsOpen] = useState(false);
 	const [link, setLink] = useState("");
@@ -28,15 +28,15 @@ export function VideoClip() {
 
 			<VideoClipContainer>
 
-				<CategoryGroup title="5 Melhor vídeo clipe">
+				<CategoryGroup title="7 Melhor edição">
 					{videoClips.sort((a, b) => {
 						if (a.name < b.name) return -1;
 						if (a.name > b.name) return 1;
 						return 0;
 					}).map(videoClip => (
 						<Card
-							isSelected={selectedVideoClip.id === videoClip.id}
-							setSelected={setSelectedVideoClip}
+							isSelected={selectedEdition.id === videoClip.id}
+							setSelected={setSelectedEdition}
 							id={videoClip.id}
 							key={videoClip.id}
 							title={videoClip.name}
@@ -47,7 +47,7 @@ export function VideoClip() {
 				</CategoryGroup>
 			</VideoClipContainer>
 
-			<NextCategory link="costume" hasSelected={JSON.stringify(selectedVideoClip) !== "{}"} />
+			<ConfirmVoteSection />
 
 			<VideoModal isOpen={isOpen} onRequestClose={handleCloseModal} link={link} />
 		</>

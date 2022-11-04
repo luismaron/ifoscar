@@ -7,8 +7,8 @@ import { VideoModal } from "../../components/VideoModal";
 import { VoteContext } from "../../contexts/VoteContext";
 import { VideoClipContainer } from "./styles";
 
-export function VideoClip() {
-	const { videoClips, selectedVideoClip, setSelectedVideoClip } = useContext(VoteContext);
+export function Costume() {
+	const { videoClips, selectedCostume, setSelectedCostume } = useContext(VoteContext);
 
 	const [isOpen, setIsOpen] = useState(false);
 	const [link, setLink] = useState("");
@@ -28,15 +28,15 @@ export function VideoClip() {
 
 			<VideoClipContainer>
 
-				<CategoryGroup title="5 Melhor vídeo clipe">
+				<CategoryGroup title="6 Melhor figurino">
 					{videoClips.sort((a, b) => {
 						if (a.name < b.name) return -1;
 						if (a.name > b.name) return 1;
 						return 0;
 					}).map(videoClip => (
 						<Card
-							isSelected={selectedVideoClip.id === videoClip.id}
-							setSelected={setSelectedVideoClip}
+							isSelected={selectedCostume.id === videoClip.id}
+							setSelected={setSelectedCostume}
 							id={videoClip.id}
 							key={videoClip.id}
 							title={videoClip.name}
@@ -47,7 +47,7 @@ export function VideoClip() {
 				</CategoryGroup>
 			</VideoClipContainer>
 
-			<NextCategory link="costume" hasSelected={JSON.stringify(selectedVideoClip) !== "{}"} />
+			<NextCategory link="edition" hasSelected={JSON.stringify(selectedCostume) !== "{}"} />
 
 			<VideoModal isOpen={isOpen} onRequestClose={handleCloseModal} link={link} />
 		</>
