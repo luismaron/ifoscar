@@ -39,8 +39,6 @@ class ListVideoClipsPaginatedService {
       videoClips,
       videoClipCount,
     };
-
-    return videoClips;
   }
 }
 

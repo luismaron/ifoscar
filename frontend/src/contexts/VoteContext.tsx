@@ -26,11 +26,15 @@ interface VoteContextType {
 	selectedActress: Actor;
 	selectedSupportingActress: Actor;
 	selectedVideoClip: VideoClip;
+	selectedCostume: VideoClip;
+	selectedEdition: VideoClip;
 	setSelectedActor: (id: string) => void;
 	setSelectedSupportingActor: (id: string) => void;
 	setSelectedActress: (id: string) => void;
 	setSelectedSupportingActress: (id: string) => void;
 	setSelectedVideoClip: (id: string) => void;
+	setSelectedCostume: (id: string) => void;
+	setSelectedEdition: (id: string) => void;
 	reset: () => void;
 }
 
@@ -47,6 +51,8 @@ export function VoteContextProvider({ children }: VoteContextProviderProps) {
 	const [selectedActress, setSelectedActress] = useState<Actor>({} as Actor);
 	const [selectedSupportingActress, setSelectedSupportingActress] = useState<Actor>({} as Actor);
 	const [selectedVideoClip, setSelectedVideoClip] = useState<VideoClip>({} as VideoClip);
+	const [selectedCostume, setSelectedCostume] = useState<VideoClip>({} as VideoClip);
+	const [selectedEdition, setSelectedEdition] = useState<VideoClip>({} as VideoClip);
 
 	function onSelectActor(id: string) {
 		const findActor = videoClips.find(videoClip => videoClip.actor.id === id) as VideoClip;
@@ -67,10 +73,19 @@ export function VoteContextProvider({ children }: VoteContextProviderProps) {
 		setSelectedSupportingActress(findActress.supporting_actress);
 	}
 
-
 	function onSelectVideoClip(id: string) {
 		const findVideoClip = videoClips.find(videoClip => videoClip.id === id) as VideoClip;
 		setSelectedVideoClip(findVideoClip);
+	}
+
+	function onSelectCostume(id: string) {
+		const findVideoClip = videoClips.find(videoClip => videoClip.id === id) as VideoClip;
+		setSelectedCostume(findVideoClip);
+	}
+
+	function onSelectEdition(id: string) {
+		const findVideoClip = videoClips.find(videoClip => videoClip.id === id) as VideoClip;
+		setSelectedEdition(findVideoClip);
 	}
 
 	function reset() {
@@ -79,6 +94,8 @@ export function VoteContextProvider({ children }: VoteContextProviderProps) {
 		setSelectedActress({} as Actor);
 		setSelectedSupportingActress({} as Actor);
 		setSelectedVideoClip({} as VideoClip);
+		setSelectedCostume({} as VideoClip);
+		setSelectedEdition({} as VideoClip);
 	}
 
 	useEffect(() => {
@@ -99,11 +116,15 @@ export function VoteContextProvider({ children }: VoteContextProviderProps) {
 			selectedActress,
 			selectedSupportingActress,
 			selectedVideoClip,
+			selectedCostume,
+			selectedEdition,
 			setSelectedActor: onSelectActor,
 			setSelectedSupportingActor: onSelectSupportingActor,
 			setSelectedActress: onSelectActress,
 			setSelectedSupportingActress: onSelectSupportingActress,
 			setSelectedVideoClip: onSelectVideoClip,
+			setSelectedCostume: onSelectCostume,
+			setSelectedEdition: onSelectEdition,
 			reset
 		}}>
 			{children}

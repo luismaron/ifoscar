@@ -28,7 +28,6 @@ export function Actor() {
 			<Header hasBeforePage={false} />
 
 			<ActorContainer>
-
 				<CategoryGroup title="1 Melhor ator">
 					{sortByActorName(videoClips, "actor").map(videoClip => (
 						<Card

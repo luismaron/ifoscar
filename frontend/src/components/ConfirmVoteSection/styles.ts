@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
-export const ConfirmVoteButtonContainer = styled.div`
+export const ConfirmVoteSectionContainer = styled.div`
   margin-top: 6rem;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  gap: 3rem;
+  gap: 2rem;
 
   img {
     @media (max-width: 1024px) {
@@ -15,6 +15,21 @@ export const ConfirmVoteButtonContainer = styled.div`
 
     @media (max-width: 600px) {
       width: 70%;
+    }
+  }
+
+  input {
+    background: ${({ theme }) => theme.colors["gray"]};
+    border: 0;
+    padding: 1.25rem;
+    border-radius: 8px;
+    outline: none;
+    border: 1px solid transparent;
+
+    font-size: 1.25rem;
+
+    &:focus-within {
+      border: 1px solid ${({ theme }) => theme.colors.yellow};
     }
   }
 
