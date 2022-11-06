@@ -46,7 +46,6 @@ export default function Winners() {
 			const winner: Winner = responseStudents.data;
 
 			setWinners(winner)
-			console.log(winners)
 		}
 
 		loadData();
@@ -68,12 +67,12 @@ export default function Winners() {
 				<Sidebar />
 				<div className="mt-10 ml-10 flex flex-col w-4/5 mr-10">
 					<div className="flex justify-between">
-						<h1 className="text-gray-150 text-4xl font-medium">Vendedores</h1>
+						<h1 className="text-gray-150 text-4xl font-medium">Vencedores</h1>
 
 						<select
 							name="category"
-							className={`flex items-center px-5 py-4 text-gray-350 text-xl outline-none bg-gray-850 rounded-md border-2 border-transparent focus-within:border-blue-450`}
-							onChange={(e) => { console.log(e.target.value); setSelectedCategory(e.target.value) }}
+							className={`flex items-center px-5 py-4 text-gray-350 text-xl outline-none bg-gray-850 rounded-md border-2 border-transparent focus-within:border-yellow-500`}
+							onChange={(e) => setSelectedCategory(e.target.value)}
 						>
 							{
 								(Object.keys(Categories) as Array<keyof typeof Categories>).

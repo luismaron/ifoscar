@@ -13,13 +13,13 @@ const TextAreaBase: ForwardRefRenderFunction<HTMLTextAreaElement, TextAreaProps>
   return (
     <div>
       <div className="flex items-center gap-4 mb-2">
-        <label className="text-base text-blue-250 tracking-wider" htmlFor={name}>
+        <label className="text-base text-yellow-500 tracking-wider" htmlFor={name}>
           {label} {optional && <span className="text-gray-400">(opcional)</span>}
         </label>
         { error && <span className="text-red text-sm">({error})</span> }
       </div>
 
-      <div className={`flex items-center px-5 py-4 ${variant === 'default' ? 'bg-gray-850' : 'bg-gray-950'} rounded-md border-2 border-transparent focus-within:border-blue-450`}>
+      <div className={`flex items-center px-5 py-4 ${variant === 'default' ? 'bg-gray-850' : 'bg-gray-950'} rounded-md border-2 border-transparent focus-within:border-yellow-500`}>
         <textarea
           name={name}
           ref={ref}

@@ -20,9 +20,6 @@ export default function Students() {
   const pageSize = 10;
   const [totalResults, setTotalResults] = useState(0);
 
-
-
-
   useEffect(() => {
     async function loadData() {
       const responseStudents = await api.get("/students/paginated", {
@@ -57,7 +54,7 @@ export default function Students() {
           />
           <Sidebar />
 
-          <div className="mt-10 ml-10 flex flex-col">
+          <div className="my-10 ml-10 flex flex-col">
             <h1 className="text-gray-150 text-4xl font-medium">Listagem de estudantes</h1>
 
             <table className="max-w-5xl w-full mt-9 pb-4 border-separate border-spacing-y-2 overflow-x-auto block whitespace-nowrap scrollbar scrollbar-thumb-gray-450 scrollbar-track-gray-850">

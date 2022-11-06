@@ -16,8 +16,6 @@ export async function ensureAuthenticated(
 
   const [, token] = authHeader.split(' ');
 
-  console.log(token);
-
   const secretToken = process.env.JWT_SECRET as string;
   try {
     const { sub: user_id } = verify(token, secretToken);

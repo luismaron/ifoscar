@@ -39,7 +39,7 @@ export default function SignIn() {
           autoClose={2000} 
           pauseOnHover={false} 
         />
-        <div className="md:w-[53%] h-full p-2 bg-gradient-to-br from-blue-350 via-blue-450 to-purple-750 flex flex-col justify-between">
+        <div className="md:w-[53%] h-full p-2 bg-gradient-to-br from-yellow-500 via-yellow-500 to-yellow-700 flex flex-col justify-between">
           <h1 className="text-5xl font-medium text-white ml-12 mt-32">
             Dashboard
           </h1>
@@ -74,7 +74,7 @@ export default function SignIn() {
             />
 
             <button
-              className="mt-3 mb-10 w-48 h-14 flex justify-center items-center rounded-md bg-gradient-to-r from-blue-350 to-purple-750 text-xl text-white hover:brightness-90 transition" 
+              className="mt-3 mb-10 w-48 h-14 flex justify-center items-center rounded-md bg-gradient-to-r from-yellow-500 to-yellow-700 text-xl text-white hover:brightness-90 transition" 
               type="submit"
             >
               Login

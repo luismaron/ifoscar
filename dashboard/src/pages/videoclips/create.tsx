@@ -58,7 +58,6 @@ export default function CreateVideoClip() {
 
   const handleCreateVideoClip: SubmitHandler<CreateVideoClipFormData> =
     async ({ name, link, actor_id, actress_id, supporting_actor_id, supporting_actress_id }) => {
-      console.log('vai da o cu')
       setIsLoading(true);
 
       try {
@@ -77,7 +76,6 @@ export default function CreateVideoClip() {
       }
       catch (error) {
         toast.error("Erro ao criar videoclip.");
-        console.log(error)
       }
       finally {
         setIsLoading(false)
@@ -103,7 +101,7 @@ export default function CreateVideoClip() {
           <Sidebar />
 
           <div className="mt-10 ml-10 flex flex-col">
-            <h1 className="text-gray-150 text-4xl font-medium">Criação de fases</h1>
+            <h1 className="text-gray-150 text-4xl font-medium">Criação de videoclipes</h1>
             <form className="mt-9 px-4" onSubmit={handleSubmit(handleCreateVideoClip)}>
               <div className="max-w-3xl w-full flex flex-col gap-4 mb-7">
                 <div className="flex gap-5">

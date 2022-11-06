@@ -53,7 +53,6 @@ export default function CreateStudents() {
       }
       catch (error) {
         toast.error("Erro ao criar estudante.");
-        console.log(error)
       }
       finally {
         setIsLoading(false)

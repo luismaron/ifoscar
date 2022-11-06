@@ -80,8 +80,8 @@ export default function VideoClips() {
           />
           <Sidebar />
 
-          <div className="mt-10 ml-10 flex flex-col">
-            <h1 className="text-gray-150 text-4xl font-medium">Listagem de estudantes</h1>
+          <div className="my-10 ml-10 flex flex-col">
+            <h1 className="text-gray-150 text-4xl font-medium">Listagem de videoclipes</h1>
 
             <table className="max-w-5xl w-full mt-9 pb-4 border-separate border-spacing-y-2 overflow-x-auto block whitespace-nowrap scrollbar scrollbar-thumb-gray-450 scrollbar-track-gray-850">
               <thead>
